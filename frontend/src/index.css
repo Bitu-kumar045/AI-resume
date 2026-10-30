@@ -6,11 +6,21 @@
   :root {
     color-scheme: dark;
   }
+
+  html.light {
+    color-scheme: light;
+  }
   
   body {
     background-color: #070e1e;
     color: #f1f5f9;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  html.light body {
+    background-color: #f8fafc;
+    color: #0f172a;
   }
 
   /* Custom keyboard focus styles */
@@ -20,6 +30,44 @@
     ring-offset: 2px solid #070e1e;
   }
 }
+
+/* Light Mode Overrides for Navy Aesthetic */
+html.light .bg-navy-950 { background-color: #f8fafc !important; }
+html.light .bg-\[\#070e1e\] { background-color: #f8fafc !important; }
+html.light .bg-\[\#070e1e\]\/90 { background-color: rgba(255, 255, 255, 0.9) !important; }
+html.light .bg-\[\#091328\] { background-color: #ffffff !important; }
+html.light .bg-\[\#0c1730\] { background-color: #ffffff !important; }
+html.light .bg-\[\#0f1d3b\] { 
+  background-color: #ffffff !important; 
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.04) !important; 
+}
+html.light .bg-\[\#101f42\] { background-color: #f0f7ff !important; }
+html.light .bg-\[\#132247\] { background-color: #f1f5f9 !important; }
+html.light .bg-\[\#14254b\] { background-color: #e2e8f0 !important; }
+html.light .bg-\[\#15254d\] { background-color: #e2e8f0 !important; }
+html.light .bg-\[\#122246\] { background-color: #f1f5f9 !important; }
+html.light .bg-\[\#0f1d3e\] { background-color: #f1f5f9 !important; }
+html.light .bg-\[\#1b2f61\] { background-color: #e2e8f0 !important; }
+
+html.light .border-\[\#142347\] { border-color: #e2e8f0 !important; }
+html.light .border-\[\#1e3463\] { border-color: #e2e8f0 !important; }
+html.light .border-\[\#182b54\] { border-color: #e2e8f0 !important; }
+html.light .border-\[\#233a6f\] { border-color: #cbd5e1 !important; }
+html.light .border-\[\#203666\] { border-color: #cbd5e1 !important; }
+html.light .border-\[\#2b4478\] { border-color: #cbd5e1 !important; }
+html.light .border-\[\#1c2f5a\] { border-color: #cbd5e1 !important; }
+
+html.light .text-white { color: #0f172a !important; }
+html.light .text-slate-100 { color: #0f172a !important; }
+html.light .text-slate-200 { color: #1e293b !important; }
+html.light .text-slate-300 { color: #334155 !important; }
+html.light .text-slate-400 { color: #64748b !important; }
+html.light .text-blue-200\/75 { color: #2563eb !important; }
+
+/* Light Mode Chip Overrides */
+html.light .bg-\[\#351a1a\]\/70 { background-color: #fff7ed !important; }
+html.light .bg-\[\#07302c\] { background-color: #ecfdf5 !important; }
+
 
 /* Custom modern scrollbar */
 ::-webkit-scrollbar {

@@ -1,5 +1,5 @@
 import api from './api';
-import { initialAdminUsers, skillDemandAnalytics } from './mockData';
+import { initialAdminUsers, initialJobs, skillDemandAnalytics } from './mockData';
 
 const getStoredUsers = () => {
   const stored = localStorage.getItem('resumefit_admin_users');
@@ -48,13 +48,32 @@ export const adminService = {
     }
   },
 
-  // GET /admin/analytics/skills (demanded skills data for Recharts)
+  // GET /admin/analytics/skills (demanded skills data for Recharts, calculated live from jobs)
   async getSkillDemand() {
     try {
       const response = await api.get('/admin/analytics/skills');
       return response.data;
     } catch (err) {
-      return skillDemandAnalytics;
+      // Calculate live market demand dynamically based on all current job postings
+      const stored = localStorage.getItem('resumefit_jobs');
+      const jobs = stored ? JSON.parse(stored) : initialJobs;
+      const countMap = {};
+
+      jobs.forEach((job) => {
+        (job.requiredSkills || []).forEach((skill) => {
+          countMap[skill] = (countMap[skill] || 0) + 1;
+        });
+      });
+
+      const chartData = Object.entries(countMap)
+        .map(([skill, demand]) => ({
+          skill,
+          demand,
+        }))
+        .sort((a, b) => b.demand - a.demand)
+        .slice(0, 8);
+
+      return chartData.length > 0 ? chartData : skillDemandAnalytics;
     }
   },
 
@@ -64,12 +83,19 @@ export const adminService = {
       const response = await api.get('/admin/overview');
       return response.data;
     } catch (err) {
+      const stored = localStorage.getItem('resumefit_jobs');
+      const jobs = stored ? JSON.parse(stored) : initialJobs;
+      const totalApplicants = jobs.reduce((sum, j) => sum + (j.applicantsCount || 0), 0);
+
       return {
         totalUsers: 248,
-        activeJobs: 34,
-        resumesParsed: 812,
+        activeJobs: jobs.length,
+        resumesParsed: 812 + totalApplicants,
         averageMatchRate: 72,
+        totalApplications: totalApplicants || 85,
       };
     }
   },
 };
+
+export default adminService;

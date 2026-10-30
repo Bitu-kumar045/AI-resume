@@ -54,9 +54,11 @@ export const AdminDashboard = () => {
       setUsers(usersData);
       setJobs(jobsData);
       setSkillsData(skills);
+      const totalApps = jobsData.reduce((sum, j) => sum + (j.applicantsCount || 0), 0);
       setStats({
         totalUsers: usersData.length || overview.totalUsers,
         activeJobs: jobsData.length || overview.activeJobs,
+        totalApplications: totalApps || overview.totalApplications || 85,
         resumesParsed: overview.resumesParsed,
         averageMatchRate: overview.averageMatchRate,
       });
@@ -157,15 +159,15 @@ export const AdminDashboard = () => {
           <div className="bg-[#0f1d3b] border border-[#1e3463] rounded-2xl p-5 shadow-lg">
             <div className="flex items-center justify-between text-slate-400">
               <span className="text-xs font-semibold uppercase tracking-wider">
-                Resumes Parsed
+                Applications & Resumes
               </span>
               <FileCheck className="w-5 h-5 text-emerald-400" />
             </div>
             <div className="text-3xl font-black text-white mt-2">
-              {stats.resumesParsed}
+              {stats.totalApplications || stats.resumesParsed}
             </div>
             <span className="text-xs text-emerald-400 mt-1 inline-block">
-              99.2% parsing success
+              {stats.resumesParsed} resumes parsed
             </span>
           </div>
 

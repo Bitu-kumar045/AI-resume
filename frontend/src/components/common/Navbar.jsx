@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { Sparkles, Menu, X, LogOut, User, Shield, Briefcase, GraduationCap } from 'lucide-react';
+import { useTheme } from '../../context/ThemeContext';
+import { Sparkles, Menu, X, LogOut, User, Shield, Briefcase, GraduationCap, Sun, Moon } from 'lucide-react';
 
 export const Navbar = () => {
   const { user, role, logout, switchRole, isAuthenticated } = useAuth();
+  const { theme, toggleTheme, isDark } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -76,6 +78,21 @@ export const Navbar = () => {
 
           <div className="h-5 w-px bg-[#1c2f5a] mx-2" />
 
+          {/* Theme Toggle Button */}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            title={isDark ? 'Switch to Light mode' : 'Switch to Dark mode'}
+            aria-label="Toggle color theme"
+            className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-[#122246] transition-all focus-visible:ring-2 focus-visible:ring-blue-500"
+          >
+            {isDark ? (
+              <Sun className="w-4 h-4 text-amber-400 hover:rotate-45 transition-transform" />
+            ) : (
+              <Moon className="w-4 h-4 text-blue-600 hover:-rotate-12 transition-transform" />
+            )}
+          </button>
+
           {/* Auth State Button */}
           {isAuthenticated ? (
             <div className="flex items-center gap-3">
@@ -102,8 +119,23 @@ export const Navbar = () => {
           )}
         </nav>
 
-        {/* Mobile menu button */}
+        {/* Mobile menu and theme buttons */}
         <div className="flex md:hidden items-center gap-2">
+          {/* Mobile Theme Toggle */}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            title={isDark ? 'Switch to Light mode' : 'Switch to Dark mode'}
+            aria-label="Toggle color theme"
+            className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-[#122246]"
+          >
+            {isDark ? (
+              <Sun className="w-5 h-5 text-amber-400" />
+            ) : (
+              <Moon className="w-5 h-5 text-blue-500" />
+            )}
+          </button>
+
           {isAuthenticated && (
             <span className="text-xs px-2 py-0.5 rounded-full bg-[#162752] text-blue-300 border border-[#263e77] capitalize">
               {role}
