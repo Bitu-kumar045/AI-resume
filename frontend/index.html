@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ResumeFit — AI Resume Analyzer & Job Matching</title>
+    <meta name="description" content="AI-powered resume analyzer and job matching platform. See how your resume fits each job with real-time skill gap analysis and scoring." />
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-navy-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-blue-600 selection:text-white">
+    <div id="root"></div>
+    <div id="file-protocol-warning" style="display:none; position:fixed; inset:0; background:#070e1e; color:#f1f5f9; font-family:sans-serif; padding:40px 20px; z-index:99999; text-align:center;">
+      <div style="max-width:560px; margin:40px auto; background:#0f1d3b; border:1px solid #1e3463; border-radius:16px; padding:32px; box-shadow:0 20px 25px -5px rgba(0,0,0,0.5);">
+        <div style="font-size:36px; margin-bottom:16px;">🚀</div>
+        <h2 style="font-size:22px; font-weight:bold; margin-bottom:12px; color:#ffffff;">Open via Local Server</h2>
+        <p style="font-size:14px; color:#94a3b8; line-height:1.6; margin-bottom:20px;">
+          Modern React applications cannot run directly from raw <code style="background:#172b55; padding:2px 6px; border-radius:4px; color:#60a5fa;">file://</code> paths because web browsers enforce CORS restrictions on ES modules.
+        </p>
+        <p style="font-size:14px; color:#e2e8f0; font-weight:600; margin-bottom:16px;">
+          To open ResumeFit directly:
+        </p>
+        <div style="background:#0c1730; border:1px solid #182b54; border-radius:12px; padding:16px; text-align:left; font-size:13px; font-family:monospace; color:#38bdf8; margin-bottom:20px;">
+          1. Double-click <b>start-resumefit.bat</b> in the project folder<br>
+          <span style="color:#64748b;">-- OR run in your terminal: --</span><br>
+          2. npm run dev
+        </div>
+        <a href="http://localhost:5173" style="display:inline-block; background:#2563eb; color:#ffffff; font-weight:600; font-size:14px; padding:12px 24px; border-radius:10px; text-decoration:none;">Go to http://localhost:5173</a>
+      </div>
+    </div>
+    <script>
+      if (window.location.protocol === 'file:') {
+        document.getElementById('file-protocol-warning').style.display = 'block';
+      }
+    </script>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
